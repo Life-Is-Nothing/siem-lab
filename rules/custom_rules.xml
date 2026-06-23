@@ -1,0 +1,30 @@
+<!-- Wazuh Custom Rules - ibramoha2/siem-lab -->
+<group name="custom_security,">
+
+  <rule id="100001" level="12" frequency="5" timeframe="60">
+    <if_matched_sid>5710</if_matched_sid>
+    <description>Brute-force SSH detecte</description>
+    <group>authentication_failures,brute_force,</group>
+  </rule>
+
+  <rule id="100002" level="14">
+    <if_sid>5902</if_sid>
+    <description>Creation d un nouveau compte utilisateur</description>
+    <group>account_changes,</group>
+  </rule>
+
+  <rule id="100003" level="13">
+    <if_sid>554</if_sid>
+    <field name="file">/etc/passwd|/etc/shadow|/etc/sudoers</field>
+    <description>Modification fichier systeme sensible</description>
+    <group>system_integrity,</group>
+  </rule>
+
+  <rule id="100004" level="8">
+    <if_sid>5715</if_sid>
+    <time>10 pm - 6 am</time>
+    <description>Connexion SSH hors des horaires habituels</description>
+    <group>authentication_success,anomaly,</group>
+  </rule>
+
+</group>
